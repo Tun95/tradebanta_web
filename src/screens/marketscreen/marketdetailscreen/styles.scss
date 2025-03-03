@@ -1,0 +1,74 @@
+.market_details_screen {
+  padding: 30px 0px;
+  margin-bottom: 50px;
+  .market_content {
+    padding: 0px 100px;
+    gap: 20px;
+    .left_boxes {
+      width: 100%;
+    }
+    .right_boxes {
+      .combo_mobile_btn {
+        display: none;
+        padding: 0px 10px;
+        bottom: 40px;
+        .btn {
+          position: relative;
+          bottom: 7px;
+        }
+      }
+      .combo_blast {
+        margin-top: 0px;
+      }
+    }
+    .toggle_btn {
+      .btn {
+        background-color: var(--color-light-light-gray);
+      }
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 1260px) {
+    padding: 20px 0px;
+    .market_content {
+      padding: 0px;
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 900px) {
+    .market_content {
+      flex-direction: column;
+
+      .right_boxes {
+        width: 100%;
+        .pred_box {
+          width: 100%;
+          .combo_blast {
+            width: 100%;
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 450px) {
+    padding-bottom: 70px;
+    .market_content {
+      .right_boxes {
+        .pred_box {
+          display: none;
+        }
+        .combo_mobile_btn {
+          display: flex;
+          .select_options_component {
+            margin-top: 20px;
+            .main_btn {
+              padding-bottom: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

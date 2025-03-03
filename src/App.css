@@ -1,0 +1,438 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #f0f0f0;
+  --color-blue-black-bg: #111928;
+  --color-light-light-gray-bg: #edebfe;
+
+  --color-border: #e5e7eb;
+  --color-background: #f6f9fc;
+  --color-primary: #c3ed1a;
+  --color-primary-hover: #d4fa3c;
+  --color-hover-bg: #fcf7ff;
+  --color-red: #f05252;
+  --color-deep-red: #9b1c1c;
+  --color-yellow: #e6d702;
+  --color-deep-yellow: #c27803;
+  --color-white: #ffffff;
+  --color-green: #0e9f6e;
+  --color-deep-green: #03543f;
+  --color-dark: #111111;
+  --color-black: #2e2e2e;
+  --color-tab: #389efd;
+  --color-dark-blue: #3f83f8;
+  --color-purple: #7e3af2;
+  --color-deep-purple: #233876;
+  --color-orange: #d03801;
+  --color-pink: #e74694;
+  --color-dark-pink: #99154b;
+
+  --color-bg-yellow: #e3a008;
+
+  --color-gray: #777777;
+  --color-dark-gray: #4e4e4e;
+  --color-light-dark-gray: hsl(0, 0%, 60%);
+  --color-text-gray: #374352;
+
+  --color-light-orange: #ff5a1f;
+  --color-light-gray: #f3f4f6;
+  --color-light-light-gray: #f9fafb;
+  --color-light-lime: #bceb00;
+  --color-light-light-red: #fde8e8;
+  --color-light-light-green: #def7ec;
+  --color-light-light-lime: #f2fbcc;
+  --color-light-light-pink: #fce8f3;
+  --color-light-light-blue: #e1effe;
+
+  --color-btn-shadow: rgb(3 0 71 / 20%) 1px 4px 5px;
+
+  --transition: all 600ms ease;
+  --light-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+  --container-width-lg: 85%;
+  --container-width-md: 95%;
+  --container-width-sm: 96%;
+}
+
+.dark {
+  --color-border: #1e2432;
+  --color-white: #111928;
+  --color-black: #e0e0e0;
+  --color-dark: #ffffff;
+  --color-light-gray: #212734;
+  --color-text-gray: #6b7280;
+  --color-text-btn: #9ca3af;
+  --color-sm-text: #d1d5db;
+  --color-gray: #d1d5db;
+  --color-dark-gray: #d1d5db;
+  --color-light-light-gray: #212734;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--color-white);
+}
+.dark body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.container {
+  width: var(--container-width-lg);
+  max-width: 1600px;
+  margin: auto;
+}
+
+.mtb {
+  margin: 20px 0px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mt {
+  margin-top: 20px;
+}
+.ml {
+  margin-left: 20px;
+}
+.mr {
+  margin-right: 20px;
+}
+.mb {
+  margin-bottom: 20px;
+}
+.light_shadow {
+  box-shadow: var(--light-shadow);
+  border-radius: 15px;
+}
+.dark .light_shadow {
+  border: 1px solid var(--color-border);
+}
+
+.dark .white_image {
+  filter: invert(1);
+}
+
+.f_flex {
+  display: flex;
+}
+.d_flex {
+  display: flex;
+  justify-content: space-between;
+}
+.d_grid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.j_flex {
+  display: flex;
+  justify-content: space-around;
+}
+.c_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a_flex {
+  display: flex;
+  align-items: center;
+}
+.l_flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s_flex {
+  display: flex;
+
+  flex-direction: column;
+}
+.p_flex {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-black);
+}
+li {
+  list-style: none;
+}
+
+input,
+button,
+select {
+  outline: none;
+  background: transparent;
+  /* border: 2px solid var(--color-border); */
+  color: var(--color-primary-dark);
+  border: none;
+}
+.select {
+  padding: 12px 15px;
+  outline: none;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  width: 100%;
+  background: transparent !important;
+}
+input {
+  color: var(--color-dark-gray);
+}
+
+textarea {
+  background: transparent;
+  border: 2px solid;
+  resize: none;
+
+  padding: 10px;
+  font-size: 15px;
+  font-family: sans-serif;
+  outline: none;
+  width: 100%;
+  border: none;
+}
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-gray);
+  font-size: 13px;
+}
+
+/* Hide arrows in Chrome, Safari, and Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.eye-icon {
+  color: var(--color-light-gray);
+}
+input.input-error,
+select.input-error {
+  border-color: var(--color-red) !important;
+}
+.error {
+  color: var(--color-red);
+  font-size: 13px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
+.disabled {
+  background-color: var(--color-btn-disabled-bg);
+  color: var(--color-light-light-gray);
+  cursor: not-allowed;
+  padding: 7px 10px;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 4px;
+}
+.main_btn {
+  padding: 6px 15px;
+  font-size: 15px;
+  border-radius: 20px;
+}
+.main_btn:hover:not(:disabled) {
+  background-color: var(--color-light-green);
+}
+
+.dark input,
+button,
+select {
+  color: var(--color-black);
+}
+
+[type="search"]::-webkit-search-cancel-button {
+  color: var(--color-primary-dark);
+}
+
+.dark select {
+  background-color: var(--color-white) !important;
+  color: var(--color-black);
+}
+
+/* antd select */
+.custom-select .ant-select-selector {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important; /* Optional */
+}
+.custom-select {
+  height: 25px !important;
+  min-width: 200px !important;
+}
+
+.dark .ant-select-selector {
+  color: var(--color-black) !important;
+  background-color: var(--color-white) !important;
+}
+
+/* Dropdown background */
+.dark .ant-select-dropdown {
+  background-color: var(--color-white) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown option styles */
+.dark .ant-select-item {
+  background-color: var(--color-white) !important;
+  color: var(--color-black) !important;
+}
+
+/* Highlighted dropdown option (hover or selected state) */
+.dark .ant-select-item-option-active {
+  background-color: var(--color-light-gray) !important;
+  color: var(--color-black) !important;
+}
+
+/* Selected option */
+.dark .ant-select-item-option-selected {
+  background-color: var(--color-gray) !important;
+  color: var(--color-white) !important;
+}
+
+.dark .ant-select-selector .ant-select-selection-placeholder {
+  color: var(--color-black) !important;
+  opacity: 0.7;
+}
+
+/* Dropdown arrow icon in dark mode */
+.dark .ant-select-arrow {
+  color: var(--color-black) !important;
+}
+
+/* Optional: Add hover effect for the dropdown icon */
+.dark .ant-select-arrow:hover {
+  color: var(--color-gray) !important;
+}
+
+.dark .close_icon .icon {
+  color: var(--color-dark);
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.red {
+  color: var(--color-red);
+}
+.green {
+  color: var(--color-green);
+}
+.gray {
+  color: var(--color-gray);
+}
+.yellow {
+  color: var(--color-yellow);
+}
+.blue {
+  color: var(--color-tab);
+}
+.purple {
+  color: var(--color-purple);
+}
+.white {
+  color: var(--color-white) !important;
+}
+/* LIGHT BLACK */
+.dark .white {
+  --color-white: #111928;
+}
+
+/*----- control btn -------*/
+.control_btn .next,
+.control_btn .prev {
+  position: absolute;
+  /* top: -47px; */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transform: 0.5s;
+  z-index: 5;
+  background-color: var(--color-sl-w);
+  outline: none;
+  border: 2px solid var(--color-sl-br);
+  cursor: pointer;
+}
+.dark .control_btn .next,
+.control_btn .prev {
+  background-color: var(--color-sl-w);
+  border: 2px solid var(--color-text);
+}
+.control_btn .prev {
+  left: 10px;
+  top: 165px;
+  border-color: var(--color-sl-br);
+}
+.control_btn .next {
+  right: 10px;
+  bottom: 165px;
+}
+.control_btn .icon {
+  font-size: 18px;
+}
+.dark .control_btn .icon {
+  color: var(--color-primary);
+}
+
+/* REACT WEB SHARE STYLES */
+.dark .rws-header {
+  color: var(--color-black);
+}
+
+.dark .rws-container {
+  background-color: var(--color-blue-black-bg);
+}
+
+.dark .rws-close {
+  background-color: var(--color-light-gray);
+  color: var(--color-black);
+}
+
+/*----- Resolutions -------*/
+/*======= MEDIA QUERIES (LARGE DEVICES) =======*/
+@media screen and (max-width: 1400px) {
+  .container {
+    width: var(--container-width-md);
+  }
+}
+/*======= MEDIA QUERIES (MEDIUM DEVICES) =======*/
+@media screen and (max-width: 1200px) {
+  .container {
+    width: var(--container-width-sm);
+  }
+}
+/*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+@media screen and (max-width: 420px) {
+  .container {
+    width: var(--container-width-md);
+  }
+}

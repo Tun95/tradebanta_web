@@ -1,0 +1,210 @@
+.global_user_menu {
+  width: 250px;
+  padding: 10px 15px;
+
+  .user_menu_head {
+    margin-bottom: 10px;
+    .user_icon_img {
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+    }
+    .name_id {
+      .id {
+        color: var(--color-gray);
+        font-size: 13px;
+      }
+    }
+  }
+  .list {
+    padding: 10px 15px;
+    li {
+      padding: 8px 0px;
+      a {
+        gap: 10px;
+        .icon {
+          font-size: 20px;
+          color: var(--color-dark-gray);
+         
+        }
+        .text {
+          font-weight: 300;
+          font-size: 15px;
+        }
+        &:hover {
+          .icon {
+            transition: var(--transition);
+            color: var(--color-primary);
+          }
+          .text {
+            transition: var(--transition);
+            color: var(--color-primary);
+          }
+        }
+      }
+    }
+  }
+  .menu_item {
+    padding: 14px 0px;
+    cursor: pointer;
+    .list_item {
+      font-weight: 300;
+      font-size: 15px;
+    }
+  }
+  .log_out {
+    padding-bottom: 0;
+    a {
+      .icon,
+      .text {
+        color: var(--color-red) !important;
+      }
+    }
+  }
+  &.global_user_menu_dark {
+    .user_menu_head {
+      h5 {
+        color: var(--color-dark);
+      }
+      small {
+        color: var(--color-sm-text);
+      }
+    }
+    .list {
+      .icon,
+      .text {
+        color: var(--color-dark);
+      }
+    }
+    .menu_item {
+      color: var(--color-dark);
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 990px) {
+    display: none;
+  }
+}
+
+.user_menu_drawer {
+  display: none;
+  padding: 20px;
+
+  .user_menu_head {
+    margin-top: 60px;
+    .user_icon_img {
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+    }
+    .name_id {
+      .id {
+        color: var(--color-gray);
+        font-size: 14px;
+      }
+    }
+  }
+  .list {
+    padding: 15px 0px;
+    padding-bottom: 50px;
+    height: 550px;
+    overflow: hidden;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    li {
+      padding: 8px 0px;
+      a,
+      .link {
+        gap: 10px;
+        border: 1px solid var(--color-border);
+        padding: 12px;
+        border-radius: 15px;
+        cursor: pointer;
+        .icon {
+          font-size: 22px;
+          color: var(--color-dark-gray);
+          .noti_icon {
+            font-size: 25px;
+          }
+        }
+
+        .drawer_details {
+          gap: 10px;
+          .text {
+            font-weight: 300;
+            font-size: 15px;
+          }
+        }
+        &:hover {
+          .icon {
+            transition: var(--transition);
+            color: var(--color-primary);
+          }
+          .text {
+            transition: var(--transition);
+            color: var(--color-primary);
+          }
+        }
+      }
+      .logout_btn {
+        color: var(--color-red);
+        .icon,
+        .text {
+          color: var(--color-red);
+        }
+        &:hover {
+          color: var(--color-red);
+          .icon,
+          .text {
+            color: var(--color-red);
+          }
+        }
+      }
+    }
+  }
+  &.user_menu_drawer {
+    border: 1px solid var(--color-border);
+
+    .user_menu_head {
+      h4 {
+        color: var(--color-dark);
+      }
+      small {
+        color: var(--color-sm-text);
+      }
+    }
+    .list {
+      .icon,
+      .text {
+        color: var(--color-dark);
+      }
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 990px) {
+    padding: 15px 20px;
+    display: block;
+    height: 100vh;
+  }
+}
+.user_menu_not {
+  .notification_box {
+    display: none;
+  }
+}
+
+.hr_divider {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid var(--color-border);
+}

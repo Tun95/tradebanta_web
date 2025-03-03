@@ -1,0 +1,33 @@
+.bookmark_menu {
+  .content {
+    .close_head_text {
+      padding: 15px 10px;
+      display: none;
+      color: var(--color-dark);
+      .icon {
+        cursor: pointer;
+      }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 900px) {
+        display: flex;
+      }
+    }
+    .list_items {
+      overflow: hidden;
+      overflow-y: scroll;
+      height: 100vh;
+      padding: 10px;
+
+      .home_post {
+        margin: 0;
+
+        .post_list {
+          margin: 10px 0px;
+        }
+        .load_more {
+          margin-bottom: 150px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+.wallet_menu {
+  margin-top: -8px;
+  padding: 5px;
+  overflow: hidden;
+  width: 350px;
+  .content {
+    .top {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      .primary_bonus {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        color: var(--color-white);
+        padding: 0px 35px;
+        z-index: 2;
+        .icon {
+          font-size: 12px;
+          color: var(--color-primary);
+        }
+        .left,
+        .right {
+          align-items: center;
+          line-height: 30px;
+        }
+        .divider {
+          width: 1px;
+          height: 91%;
+
+          border-left: 1px dashed var(--color-white);
+        }
+      }
+      .background_color {
+        background-color: var(--color-blue-black-bg);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+      .img_bg {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+          min-height: 80px;
+          object-fit: cover;
+        }
+      }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 350px) {
+        .primary_bonus {
+          padding: 0px 15px;
+        }
+      }
+    }
+    .bottom {
+      margin-top: 15px;
+      padding: 0px 10px;
+      .btn {
+        .main_btn {
+          background-color: var(--color-light-gray);
+          padding: 8px 20px;
+          small {
+            gap: 6px;
+            .icon {
+              font-size: 18px;
+            }
+          }
+        }
+        .wallet_icon {
+          a {
+            width: 35px;
+            height: 35px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            .icon {
+              font-size: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.wallet_menu_dark {
+    border-radius: 20px;
+    .content {
+      .top {
+        .primary_bonus {
+          color: var(--color-dark);
+          .divider {
+            border-left: 1px dashed var(--color-dark);
+            position: relative;
+            bottom: 3px;
+          }
+        }
+      }
+      .bottom {
+        .btn {
+          .wallet_icon {
+            a {
+              color: var(--color-white);
+            }
+          }
+        }
+      }
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+}

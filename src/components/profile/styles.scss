@@ -1,0 +1,112 @@
+.profile_deatils {
+  .user_name {
+    padding: 6px 10px !important;
+    .icon {
+      font-size: 18px;
+    }
+  }
+  .emai_phone_box {
+    margin-top: 20px;
+    background-color: var(--color-light-light-gray);
+    padding: 5px 6px;
+    padding-left: 10px;
+    border-radius: 30px;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    .email_phone {
+      column-gap: 30px;
+      row-gap: 10px;
+      font-size: 15px;
+      flex-wrap: wrap;
+      .vh_divider {
+        padding: -5px 0px;
+      }
+      .hr_divider {
+        display: none;
+      }
+      .a_flex {
+        gap: 10px;
+      }
+      .icon {
+        font-size: 20px;
+      }
+    }
+    .btn {
+      .main_btn {
+        background-color: var(--color-primary);
+        font-weight: 600;
+        font-size: 14px;
+        gap: 5px;
+      }
+    }
+    .bg_img {
+      display: none;
+    }
+
+    /*======= MEDIA QUERIES (SNALL DEVICES) =======*/
+    @media screen and (max-width: 450px) {
+      padding: 15px;
+      .email_phone {
+        position: relative;
+        z-index: 2;
+        .vh_divider {
+          display: none;
+        }
+        .hr_divider {
+          display: flex;
+          position: relative;
+          z-index: 3;
+        }
+      }
+      .btn {
+        position: relative;
+        z-index: 5;
+        margin-top: 8px;
+      }
+      .bg_img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: block;
+        z-index: 1;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.04;
+        }
+      }
+    }
+  }
+  &.profile_deatils_dark {
+    .top_box {
+      border: none;
+    }
+    .emai_phone_box {
+      .bg_img {
+        img {
+          opacity: 1 !important;
+        }
+      }
+    }
+    .btn {
+      .main_btn {
+        color: var(--color-white);
+      }
+    }
+  }
+}
+
+.profile_tab_panel {
+  margin-top: -25px;
+  .profile_deatils_box {
+    margin-bottom: 20px;
+  }
+
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 900px) {
+    margin-top: -20px;
+  }
+}

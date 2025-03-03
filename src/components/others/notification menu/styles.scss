@@ -1,0 +1,198 @@
+.notification_menu {
+  width: 400px;
+  height: 550px;
+  margin: -8px 0px;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  .content {
+    .close_head_text {
+      padding: 15px 10px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 5px;
+      display: none;
+      .icon {
+        cursor: pointer;
+      }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 990px) {
+        display: flex;
+      }
+    }
+    .noti_header {
+      padding: 10px 15px;
+      .top {
+        margin-bottom: 10px;
+        .right {
+          gap: 10px;
+          color: var(--color-gray);
+          .mark_all {
+            border-right: 1px solid var(--color-border);
+            padding-right: 10px;
+            small {
+              cursor: pointer;
+            }
+          }
+          .settings_icon {
+            .icon {
+              cursor: pointer;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      .bottom {
+        .tabs {
+          .btn {
+            background-color: var(--color-light-light-gray);
+            border-radius: 30px;
+            padding: 3px;
+            gap: 10px;
+            .main_btn {
+              padding: 8px 15px;
+              width: 100%;
+
+              &.active {
+                background-color: var(--color-white);
+              }
+              small {
+                gap: 10px;
+              }
+              p {
+                font-weight: 600;
+                color: var(--color-dark-gray);
+              }
+              .count {
+                background-color: var(--color-red);
+                color: var(--color-white);
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                font-size: 11px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .messages {
+      margin-top: 10px;
+      padding-bottom: 50px;
+      overflow: hidden;
+      .list {
+        height: 460px;
+        overflow: hidden;
+        overflow-y: scroll;
+        padding-bottom: 10px;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .list_item {
+          padding: 10px;
+          gap: 10px;
+          border-bottom: 1px solid var(--color-border);
+          &:last-child {
+            border-bottom: none;
+          }
+          &.unread {
+            background-color: var(--color-light-light-gray);
+          }
+          .left {
+            .icon_color {
+              .icon {
+                font-size: 45px;
+              }
+            }
+          }
+          .right {
+            color: var(--color-dark-gray);
+            .title_icon {
+              gap: 5px;
+              .unread_icon {
+                position: relative;
+                bottom: 1px;
+                .icon {
+                  font-size: 13px;
+                  color: var(--color-red);
+                }
+              }
+            }
+          }
+        }
+
+        /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+        @media screen and (max-width: 900px) {
+          height: 75vh;
+          padding-bottom: 50px;
+        }
+      }
+    }
+  }
+  &.notification_menu_dark {
+    border: 1px solid var(--color-border);
+    .content {
+      .close_head_text {
+        color: var(--color-dark);
+      }
+      .noti_header {
+        .top {
+          color: var(--color-dark);
+          .right {
+            small,
+            .icon {
+              color: var(--color-dark);
+            }
+          }
+        }
+        .bottom {
+          .tabs {
+            .btn {
+              background-color: var(--color-light-gray);
+              .main_btn {
+                p {
+                  color: var(--color-sm-text);
+                }
+
+                &.active {
+                  p {
+                    color: var(--color-dark);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .messages {
+        .list {
+          .list_item {
+            &.unread {
+              background-color: var(--color-light-gray);
+            }
+            .right {
+              color: var(--color-dark);
+              .text {
+                color: var(--color-sm-text);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 990px) {
+    width: 100%;
+    border-radius: none;
+    height: 100vh;
+    margin: 0px;
+    // .content {
+    //   .messages {
+    //     .list {
+    //       height: 500px;
+    //     }
+    //   }
+    // }
+  }
+}

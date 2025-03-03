@@ -1,0 +1,406 @@
+.market_post {
+  .home_component_content {
+    width: 100%;
+    .post_itmes {
+      width: 100%;
+      .all_combo {
+        gap: 20px;
+        width: 100%;
+        ._combo {
+          width: 100%;
+        }
+        .combo {
+          width: 100%;
+          .combo_blast {
+            width: 100%;
+            /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+            @media screen and (max-width: 900px) {
+              width: 100%;
+              max-width: 100%;
+            }
+          }
+        }
+        .post_list {
+          width: 100%;
+          &.grid_2 {
+            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+
+            /*======= MEDIA QUERIES (MEDIUM DEVICES) =======*/
+            @media screen and (max-width: 1100px) {
+              grid-template-columns: 1fr;
+              width: 100%;
+            }
+          }
+        }
+        .combo {
+          max-width: 400px;
+          min-width: 320px;
+        }
+
+        /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+        @media screen and (max-width: 720px) {
+          flex-direction: column;
+          gap: 0;
+          .combo {
+            max-width: 400px;
+            min-width: 100%;
+            .combo_blast {
+              margin-top: 0px;
+            }
+          }
+        }
+        /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+        @media screen and (max-width: 450px) {
+          .combo {
+            display: none;
+          }
+          .combo_mobile_btn {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}
+.combo_mobile_btn {
+  display: none;
+  width: 100%;
+  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  position: fixed;
+  border: 1px solid var(--color-border);
+  bottom: 55px;
+  right: 0px;
+  z-index: 100;
+  background-color: var(--color-white);
+  .btn {
+    width: 100%;
+    gap: 10px;
+    .counter_text {
+      gap: 10px;
+      width: 100%;
+      background-color: var(--color-light-light-lime);
+      border-radius: 20px;
+      padding: 0px 25px;
+      .counter {
+        background-color: var(--color-green);
+        color: var(--color-white) !important;
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        border-radius: 50%;
+        font-size: 14px;
+      }
+      .text {
+        font-size: 15px;
+      }
+    }
+    ._icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      background-color: var(--color-light-gray);
+      .icon {
+        font-size: 19px;
+      }
+    }
+  }
+  &.combo_mobile_btn_dark {
+    .btn {
+      .counter_text {
+        .counter {
+          color: var(--color-dark) !important;
+        }
+        .text {
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+}
+
+.combo_blast_menu {
+  margin-top: 0;
+  height: 500px;
+  overflow: hidden;
+  overflow-y: scroll;
+  .combo_blast {
+    margin-top: 3px;
+  }
+}
+.combo_blast {
+  margin-top: 30px;
+  width: 350px;
+  .combo_content {
+    color: var(--color-black);
+    border-radius: 15px;
+    border: 1px solid var(--color-border);
+    padding: 20px;
+    position: relative;
+
+    .combo_header {
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      .text {
+        margin-top: 6px;
+        color: var(--color-gray);
+      }
+      a {
+        color: var(--color-yellow);
+      }
+    }
+    .title_icon {
+      // border-bottom: 1px solid var(--color-border);
+      padding-bottom: 10px;
+      gap: 10px;
+      .space_icon {
+        background-color: var(--color-light-gray);
+        width: 50px;
+        min-width: 50px;
+        height: 50px;
+        border-radius: 15px;
+      }
+      h4 {
+        font-size: 15px;
+        color: var(--color-dark-gray);
+      }
+    }
+
+    .solo_prediction {
+      padding: 10px 0px;
+      .candidates {
+        border: 1px solid var(--color-border);
+        border-radius: 30px;
+        padding: 8px;
+        font-size: 14px;
+        margin-top: 6px;
+        .left {
+          .img_name {
+            gap: 10px;
+            .img {
+              width: 30px;
+              height: 30px;
+              background-color: var(--color-light-gray);
+              border-radius: 50%;
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+        .right {
+          padding-right: 10px;
+          .percentage {
+            color: var(--color-green);
+          }
+        }
+      }
+    }
+    .select_wallet {
+      color: var(--color-black);
+      margin-top: 10px;
+      .usd_ngn_btn {
+        margin: 10px 0px;
+
+        .radio_group {
+          width: 100%;
+          gap: 20px;
+          .main_btn {
+            border: 1px solid var(--color-border);
+            width: 100%;
+            padding: 10px;
+            color: var(--color-black);
+            &.active {
+              border: 1px solid var(--color-yellow);
+              color: var(--color-black) !important;
+              .ant-radio-checked .ant-radio-inner {
+                border-color: var(--color-yellow);
+                background-color: var(--color-yellow);
+              }
+            }
+          }
+        }
+      }
+    }
+    .combo_predictions {
+      .predictions_list {
+        ul {
+          li {
+            gap: 20px;
+            border-bottom: 1px solid var(--color-border);
+            padding: 10px 0px;
+            &:last-child {
+              border: none;
+            }
+            .space_icon {
+              width: 50px;
+              min-width: 50px;
+              height: 50px;
+              border-radius: 15px;
+              background-color: var(--color-light-gray);
+            }
+            .title_choice {
+              width: 100%;
+              .title {
+                h5 {
+                  font-size: 13px;
+                }
+                .icon {
+                  color: var(--color-red);
+                  font-size: 18px;
+                  cursor: pointer;
+                }
+              }
+              .choice {
+                small {
+                  font-size: 12px;
+                  color: var(--color-dark-gray);
+                }
+              }
+            }
+          }
+          /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+          @media screen and (max-width: 450px) {
+            height: 100%;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .add_more_game {
+      margin-top: 10px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 8px;
+      p {
+        font-size: 13px;
+        color: var(--color-gray);
+      }
+    }
+    .lower_combo {
+      margin-top: 20px;
+      position: relative;
+      .stake {
+        padding: 10px 0px;
+        .form_group {
+          margin-top: 8px;
+          border: 1px solid var(--color-border);
+          border-radius: 30px;
+          padding: 3px;
+          .main_btn {
+            border-radius: 50%;
+            padding: 0px;
+            width: 35px;
+            height: 35px;
+            min-height: 35px;
+            background-color: var(--color-yellow);
+          }
+        }
+      }
+      .current,
+      .returns,
+      .profit {
+        background-color: var(--color-light-light-gray);
+        margin: 8px 0px;
+        padding: 15px 15px;
+        border-radius: 15px;
+        .text {
+          font-size: 12px;
+        }
+        .icon {
+          font-size: 17px;
+          margin-left: 5px;
+          position: relative;
+          bottom: 1.5px;
+        }
+        .right {
+          font-size: 15px;
+        }
+      }
+      .lower_btn {
+        margin-top: 20px;
+
+        .main_btn {
+          background-color: var(--color-primary);
+          width: 100%;
+          padding: 10px;
+          font-weight: 600;
+        }
+      }
+    }
+    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+    @media screen and (max-width: 450px) {
+      .combo_header {
+        display: none;
+      }
+      .title_icon {
+        display: flex;
+        margin-bottom: 10px;
+      }
+      .lower_combo {
+        margin-bottom: 50px;
+        width: 100%;
+        position: relative;
+        .lower_btn {
+          .btn {
+            position: fixed;
+            bottom: 30px;
+            width: 83.2%;
+            .main_btn {
+              width: 100%;
+            }
+            /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+            @media screen and (max-width: 410px) {
+              width: 82%;
+            }
+            /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+            @media screen and (max-width: 360px) {
+              width: 80%;
+            } /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+            @media screen and (max-width: 335px) {
+              width: 78%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    max-width: 350px;
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 620px) {
+    max-width: 100%;
+    width: 100%;
+  }
+  &.combo_blast_dark {
+    .combo_content {
+      .main_btn {
+        color: var(--color-white);
+        &.active {
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+}
+.not_found_space {
+  flex-direction: column;
+  height: 350px;
+  width: 100%;
+  .text {
+    text-align: center;
+    max-width: 50%;
+  }
+}

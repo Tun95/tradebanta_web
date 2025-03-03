@@ -1,0 +1,29 @@
+.bookmark_screen {
+  .bookmark_header {
+    margin-top: 25px;
+    gap: 3.5%;
+    .icon_circle {
+      background-color: var(--color-light-gray);
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      .icon {
+        color: var(--color-gray);
+      }
+    }
+    .head_text {
+      p {
+        color: var(--color-gray);
+      }
+    }
+  }
+  .main_style_screen {
+    padding-top: 0;
+
+    .home_post {
+      margin-top: 0;
+    }
+  }
+}

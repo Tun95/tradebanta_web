@@ -1,0 +1,8 @@
+.main_style_screen {
+  padding: 30px 100px;
+
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 1260px) {
+    padding: 20px 0px;
+  }
+}

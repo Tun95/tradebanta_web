@@ -1,0 +1,15 @@
+.tarnsaction_screen {
+  margin-bottom: 100px;
+
+  .head_text {
+    display: none;
+  }
+  .main_style_screen {
+    margin-top: -40px;
+  }
+
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 900px) {
+    margin-bottom: 60px;
+  }
+}

@@ -1,0 +1,48 @@
+.leader_details_screen {
+  position: relative;
+  margin-bottom: 60px;
+  .leader_details_header {
+    gap: 3.5%;
+    .icon_circle {
+      background-color: var(--color-light-gray);
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: absolute;
+      top: 30px;
+      .icon {
+        color: var(--color-gray);
+      }
+    }
+    .head_text {
+      p {
+        color: var(--color-gray);
+      }
+    }
+  }
+  .main_style_screen {
+    width: 100%;
+    .home_content {
+      gap: 20px;
+      .left_boxes {
+        width: 100%;
+      }
+      .right_boxes {
+        min-width: 300px;
+      }
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 900px) {
+    .leader_details_header {
+      display: none;
+    }
+    .main_style_screen {
+      .home_content {
+        flex-direction: column;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.footer {
+  padding: 20px 5px;
+  background-color: var(--color-light-gray);
+  .content {
+    .left {
+      p {
+        color: var(--color-dark-gray);
+      }
+    }
+    .right {
+      gap: 30px;
+      .icon {
+        font-size: 21px;
+      }
+      .a_flex {
+        gap: 10px;
+        a {
+          color: var(--color-text-gray);
+        }
+      }
+      @media screen and (max-width: 850px) {
+        gap: 20px;
+      }
+    }
+  }
+  &.footer_dark {
+    .content {
+      .left {
+        p {
+          color: var(--color-sm-text);
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 990px) {
+    display: none;
+  }
+}

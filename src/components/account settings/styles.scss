@@ -1,0 +1,346 @@
+.account_settings_tab {
+  width: 100%;
+  .content {
+    width: 100%;
+    .toggle_btn {
+      width: 100%;
+
+      /*======= MEDIA QUERIES (MEDIUM DEVICES) =======*/
+      @media screen and (max-width: 1120px) {
+        .btn {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 900px) {
+        .btn {
+          display: flex;
+        }
+      }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 720px) {
+        overflow: hidden;
+        overflow-x: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .btn {
+          min-width: 700px;
+        }
+      }
+    }
+  }
+  &.account_settings_tab_dark {
+    .tab_box {
+      .btn {
+        .main_btn {
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+}
+
+.account_tab_component {
+  .content {
+    padding: 20px;
+    width: 100%;
+    .form_box {
+      margin-top: 20px;
+      .img_icon {
+        position: relative;
+        width: 90px;
+        min-width: 90px;
+        height: 90px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        ._icon {
+          position: absolute;
+          top: 0;
+          background-color: rgba(0, 0, 0, 0.2);
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          .icon {
+            color: var(--color-white);
+            cursor: pointer;
+            font-size: 24px;
+          }
+        }
+      }
+      .inner_form {
+        margin-top: 15px;
+        .form_group {
+          border: 1px solid var(--color-border);
+          width: 45%;
+          min-width: 250px;
+          display: flex;
+          flex-direction: column;
+          padding: 5px 10px;
+          margin-bottom: 15px;
+          border-radius: 15px;
+          label {
+            text-transform: uppercase;
+            font-size: 10px;
+            color: var(--color-yellow);
+          }
+
+          .select {
+            border: none;
+            padding: 0px;
+            margin-top: -2px;
+          }
+        }
+      }
+      .btn {
+        .main_btn {
+          padding: 10px 25px;
+          border-radius: 20px;
+          font-size: 14px;
+          background-color: var(--color-primary);
+          font-weight: 600;
+        }
+      }
+    }
+
+    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+    @media screen and (max-width: 450px) {
+      .header {
+        text-align: center;
+      }
+      .form_box {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        .form_group {
+          width: 100%;
+        }
+        .btn {
+          width: 100%;
+          .main_btn {
+            width: 100%;
+          }
+        }
+      }
+      .inner_form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        .form_group {
+          width: 100% !important;
+          min-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.security_component {
+  .change_password {
+    .form_box {
+      .inner_form {
+        .form_group {
+          padding: 0px !important;
+          border: none !important;
+          input {
+            padding: 13px;
+            border: 1px solid var(--color-border);
+            border-radius: 15px;
+          }
+          .toggle_password {
+            position: relative;
+            width: 100%;
+            .eye_icon {
+              position: absolute;
+              right: 15px;
+              bottom: 10px;
+              color: var(--color-dark-gray);
+            }
+          }
+        }
+        .btn {
+          .main_btn {
+            width: 45%;
+            min-width: 250px;
+          }
+
+          /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+          @media screen and (max-width: 450px) {
+            width: 100%;
+            .main_btn {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .two_step_factor {
+    .btn {
+      .main_btn {
+        width: 45%;
+        min-width: 250px;
+        &.twofa_btn {
+          background-color: var(--color-light-gray);
+          margin-bottom: 15px;
+          color: var(--color-gray);
+        }
+      }
+
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 450px) {
+        width: 100%;
+        .main_btn {
+          width: 100%;
+        }
+      }
+    }
+    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+    @media screen and (max-width: 450px) {
+      .haeder_switch {
+        gap: 10px;
+        .header {
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+.notification_component {
+  .list {
+    margin-top: 10px;
+    .list_items {
+      padding: 15px;
+      margin-bottom: 15px;
+      .left {
+        .head {
+          font-size: 14px;
+        }
+        .text {
+          color: var(--color-dark-gray);
+        }
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .btn {
+      margin-top: 20px;
+      .main_btn {
+        width: 45%;
+        background-color: var(--color-primary);
+        min-width: 250px;
+        padding: 10px 25px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 450px) {
+        width: 100%;
+        .main_btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.verification_component {
+  .list {
+    .list_items {
+      .right {
+        .verify {
+          color: var(--color-green);
+        }
+        .pending {
+          color: var(--color-light-orange);
+        }
+        .a_flex {
+          gap: 8px;
+        }
+        .icon {
+          font-size: 18px;
+        }
+        p {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+.crypto_component {
+  .list {
+    .list_items {
+      .left {
+        color: var(--color-dark-gray);
+      }
+      .right {
+        border: 1px solid var(--color-border);
+        height: 40px;
+        width: 40px;
+        min-width: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        .icon {
+          color: var(--color-red);
+        }
+      }
+    }
+    .btn {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+      .add_adreess {
+        border: 1.5px dashed var(--color-border);
+        width: 45%;
+        min-width: 250px;
+        height: 45px;
+        border-radius: 15px;
+        font-weight: 600;
+
+        /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+        @media screen and (max-width: 450px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/* Change the background color of the switch when it's ON */
+.ant-switch-checked {
+  background-color: var(--color-primary) !important;
+}
+
+/* Change the knob color when the switch is ON */
+.ant-switch-checked .ant-switch-handle::before {
+  background-color: var(--color-white) !important;
+}
+
+/* Change the knob color when the switch is OFF */
+.ant-switch-handle::before {
+  background-color: var(--color-white) !important;
+}
+
+/* Change the background color when the switch is OFF */
+.ant-switch:not(.ant-switch-checked) {
+  background-color: var(--color-default);
+}
+
+/* Change the hover background color when the switch is OFF */
+.ant-switch:not(.ant-switch-checked) {
+  background-color: var(--color-light-gray) !important;
+  border: 1px siolid var(--color-border) !important;
+}

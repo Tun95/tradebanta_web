@@ -1,0 +1,27 @@
+.referral_screen {
+  .main_style_screen {
+    .ref_tab {
+      margin-top: 30px;
+      display: none;
+    }
+    .home_content {
+      margin-top: 20px;
+      .left_boxes {
+        height: 100%;
+      }
+      .right_boxes {
+        margin-top: 0;
+      }
+    }
+
+    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+    @media screen and (max-width: 450px) {
+      .ref_tab {
+        display: block;
+      }
+      .home_content {
+        display: none;
+      }
+    }
+  }
+}

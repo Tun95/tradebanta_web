@@ -1,0 +1,27 @@
+.comboblast_info_modal {
+  .header {
+    .text {
+      margin-top: 6px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      margin-top: 15px;
+      gap: 10px;
+      .main_btn {
+        padding: 10px 20px;
+        width: 100%;
+        background-color: var(--color-light-gray);
+        font-weight: 600;
+        text-wrap: nowrap;
+        &.remind_btn {
+          background-color: var(--color-primary);
+        }
+      }
+    }
+  }
+  .auth_content_dark {
+    .remind_btn {
+      color: var(--color-white);
+    }
+  }
+}

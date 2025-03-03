@@ -1,0 +1,26 @@
+.scan_qr_code_menu {
+  .content {
+    .crypto_address_icon {
+      margin-top: 20px;
+      .label {
+        margin-bottom: 15px;
+      }
+    }
+    .btn {
+      margin-top: 20px;
+      .main_btn {
+        background-color: var(--color-primary);
+        width: 100%;
+        padding: 12px 20px;
+        font-weight: 600;
+      }
+    }
+  }
+  .auth_content_dark {
+    .btn {
+      .main_btn {
+        color: var(--color-white);
+      }
+    }
+  }
+}

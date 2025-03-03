@@ -1,0 +1,13 @@
+.trades_screen {
+  .main_style_screen {
+    .home_content {
+      margin-top: -20px;
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 1260px) {
+    .leader_details_header {
+      display: none;
+    }
+  }
+}
