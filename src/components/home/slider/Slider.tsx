@@ -52,7 +52,7 @@ function SliderComponent() {
         <div className="slider">
           <Slider {...settings} className="slick_slider">
             {list?.map((item, index) => (
-              <SliderCards item={item} index={index} />
+              <SliderCards item={item} index={index} key={index} />
             ))}
           </Slider>
         </div>

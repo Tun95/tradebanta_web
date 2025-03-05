@@ -11,7 +11,7 @@ import { OtpAction, OtpState, OtpValues } from "../../../types/auth/types";
 import { useEffect, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { request } from "../../../base url/BaseUrl";
+import { authRequest } from "../../../base url/BaseUrl";
 
 // Initial values for the OTP form
 const initialOtpValues = {
@@ -205,7 +205,7 @@ export function VerifyEmailOtpMenu() {
       );
 
       const { data } = await axios.put(
-        `${request}/api/users/verify-otp`,
+        `${authRequest}/api/users/verify-otp`,
         {
           otp: values.otp,
         },
@@ -247,7 +247,7 @@ export function VerifyEmailOtpMenu() {
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${request}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/api/users/otp-verification`, {
           email: temporaryUserInfo.email,
           phone: temporaryUserInfo.phone,
         });
@@ -448,7 +448,7 @@ export function VerifyMobileOtpMenu() {
       );
 
       const { data } = await axios.put(
-        `${request}/api/users/verify-otp`,
+        `${authRequest}/api/users/verify-otp`,
         {
           otp: values.otp,
         },
@@ -490,7 +490,7 @@ export function VerifyMobileOtpMenu() {
 
       if (temporaryUserInfo && temporaryUserInfo.phone) {
         // Your logic to resend OTP
-        await axios.post(`${request}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/api/users/otp-verification`, {
           phone: temporaryUserInfo.phone,
         });
 

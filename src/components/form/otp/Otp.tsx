@@ -15,7 +15,7 @@ import {
 import { useEffect, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { request } from "../../../base url/BaseUrl";
+import { authRequest } from "../../../base url/BaseUrl";
 import { OtpAction, OtpState, OtpValues } from "../../../types/auth/types";
 import { Link } from "react-router-dom";
 
@@ -136,7 +136,7 @@ export function EmailOtpVerificationDropDownMenu({
       );
 
       const { data } = await axios.put(
-        `${request}/api/users/verify-otp`,
+        `${authRequest}/api/users/verify-otp`,
         {
           otp: values.otp,
         },
@@ -179,7 +179,7 @@ export function EmailOtpVerificationDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${request}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/api/users/otp-verification`, {
           email: temporaryUserInfo.email,
           phone: temporaryUserInfo.phone,
         });
@@ -398,7 +398,7 @@ export function SendEmailOtpDropDownMenu({
       );
 
       const { data } = await axios.put(
-        `${request}/api/users/verify-otp`,
+        `${authRequest}/api/users/verify-otp`,
         {
           otp: values.otp,
         },
@@ -441,7 +441,7 @@ export function SendEmailOtpDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${request}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/api/users/otp-verification`, {
           email: temporaryUserInfo.email,
           phone: temporaryUserInfo.phone,
         });
@@ -700,7 +700,7 @@ export function SendMobileOtpDropDownMenu({
       );
 
       const { data } = await axios.put(
-        `${request}/api/users/verify-otp`,
+        `${authRequest}/api/users/verify-otp`,
         {
           otp: values.otp,
         },
@@ -743,7 +743,7 @@ export function SendMobileOtpDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${request}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/api/users/otp-verification`, {
           email: temporaryUserInfo.email,
           phone: temporaryUserInfo.phone,
         });
@@ -1002,7 +1002,7 @@ export function MobileOtpVerificationDropDownMenu({
       );
 
       const { data } = await axios.put(
-        `${request}/api/users/verify-otp`,
+        `${authRequest}/api/users/verify-otp`,
         {
           otp: values.otp,
         },
@@ -1045,7 +1045,7 @@ export function MobileOtpVerificationDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${request}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/api/users/otp-verification`, {
           email: temporaryUserInfo.email,
           phone: temporaryUserInfo.phone,
         });

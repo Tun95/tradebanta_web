@@ -5,7 +5,7 @@ import { eye } from "react-icons-kit/feather/eye";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { passwordValidationSchema } from "../../../schema/Index";
 import axios from "axios";
-import { request } from "../../../base url/BaseUrl";
+import { authRequest } from "../../../base url/BaseUrl";
 import { toast } from "react-toastify";
 import {
   ErrorResponse,
@@ -122,7 +122,7 @@ function Security() {
             onSubmit={async (values, { resetForm, setSubmitting }) => {
               try {
                 await axios.put(
-                  `${request}/api/users/update-password`,
+                  `${authRequest}/api/users/update-password`,
                   {
                     currentPassword: values.currentPassword,
                     newPassword: values.newPassword,
