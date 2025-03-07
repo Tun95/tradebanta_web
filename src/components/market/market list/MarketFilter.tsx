@@ -27,8 +27,8 @@ interface MarketFiltersProps {
 }
 
 function MarketFilters({
-  activeTab,
-  toggleTab,
+  // activeTab,
+  // toggleTab,
   onCategoryFilter,
 }: MarketFiltersProps) {
   const { showDrawer } = useSideDrawerMenuContext();
