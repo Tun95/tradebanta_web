@@ -1,107 +1,109 @@
-import { useState } from "react";
+import { useState, useEffect, useReducer } from "react";
 import MarketFilters from "./MarketFilter";
 import "./styles.scss";
 import ComboBlast from "./ComboBlast";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useAppContext } from "../../../utilities/utils/Utils";
 import { useDropDownMenuContext } from "../../../context/DrawerContext";
-import l1 from "../../../assets/home/l1.png";
-import l2 from "../../../assets/home/l2.png";
-import c1 from "../../../assets/home/c1.png";
 import MarketCards from "./MarketCards";
-
-const List = [
-  {
-    id: 1,
-    title: "Who will win the Ondo State Gubernatorial Election?",
-    image: l1,
-    slug: "ondo-election",
-    endsIn: "2021-06-01",
-    category: "Election",
-    type: "election" as const, // Explicitly typed as "election"
-    pool: 2000000,
-    comments: 100,
-    candidates: [
-      { image: c1, name: "Candidate A", percentage: 80, id: "candidateA" },
-      { image: c1, name: "Candidate B", percentage: 20, id: "candidateB" },
-    ],
-  },
-  {
-    id: 2,
-    title: "Will Manchester United win against Arsenal?",
-    image: l2,
-    slug: "manu-vs-arsenal",
-    endsIn: "2021-06-01",
-    category: "Football",
-    type: "event" as const, // Explicitly typed as "event"
-    pool: 1500000,
-    comments: 50,
-    yesPercentage: 60,
-    noPercentage: 40,
-  },
-  {
-    id: 3,
-    title: "Will there be a draw in the upcoming Chess tournament?",
-    image: l2,
-    slug: "chess-tournament",
-    endsIn: "2021-06-01",
-    category: "Chess",
-    type: "event" as const, // Explicitly typed as "event"
-    pool: 1000000,
-    comments: 25,
-    yesPercentage: 30,
-    noPercentage: 70,
-  },
-  {
-    id: 4,
-    title: "Who will win the Lagos State Gubernatorial Election?",
-    image: l1,
-    slug: "lagos-election",
-    endsIn: "2021-06-01",
-    category: "Election",
-    type: "election" as const, // Explicitly typed as "election"
-    pool: 2500000,
-    comments: 150,
-    candidates: [
-      { image: c1, name: "Candidate X", percentage: 60, id: "candidateX" },
-      { image: c1, name: "Candidate Y", percentage: 40, id: "candidateY" },
-    ],
-  },
-  {
-    id: 5,
-    title: "Who will win the Ondo State Gubernatorial Election?",
-    image: l1,
-    slug: "ondo-election",
-    endsIn: "2021-06-01",
-    category: "Election",
-    type: "election" as const, // Explicitly typed as "election"
-    pool: 2000000,
-    comments: 100,
-    candidates: [
-      { image: c1, name: "Candidate A", percentage: 80, id: "candidateA" },
-      { image: c1, name: "Candidate B", percentage: 20, id: "candidateB" },
-    ],
-  },
-  {
-    id: 6,
-    title: "Will Manchester United win against Arsenal?",
-    image: l2,
-    slug: "manu-vs-arsenal",
-    endsIn: "2021-06-01",
-    category: "Football",
-    type: "event" as const, // Explicitly typed as "event"
-    pool: 1500000,
-    comments: 50,
-    yesPercentage: 60,
-    noPercentage: 40,
-  },
-];
+import axios from "axios";
+import { ErrorResponse, getError } from "../../../utilities/utils/Utils";
+import { toast } from "react-toastify";
+import { eventsRequest } from "../../../base url/BaseUrl";
+import {
+  eventsReducer,
+  initialEventState,
+  Event,
+} from "../../../types/events/list/eventlist";
 
 function Market() {
-  const { state } = useAppContext();
-  const { theme } = state;
+  const { state: appState } = useAppContext();
+  const { theme } = appState;
 
   const { setMenu, showDrawer } = useDropDownMenuContext();
+
+  // State for events
+  const [state, dispatch] = useReducer(eventsReducer, initialEventState);
+  const [activeTab, setActiveTab] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [allData, setAllData] = useState<Event[]>([]);
+  const [displayedData, setDisplayedData] = useState<Event[]>([]);
+  const itemsPerPage = 9;
+
+  //==========================
+  // Fetch all events function
+  //==========================
+  const fetchAllEvents = async () => {
+    dispatch({ type: "FETCH_REQUEST" });
+    try {
+      const response = await axios.get(eventsRequest);
+      const result = response.data;
+      setAllData(result.data);
+      setDisplayedData(result.data.slice(0, itemsPerPage));
+      dispatch({
+        type: "FETCH_SUCCESS",
+        payload: {
+          data: result.data.slice(0, itemsPerPage),
+          page: 1,
+          totalPages: Math.ceil(result.data.length / itemsPerPage),
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: "FETCH_FAIL",
+        payload: getError(error as ErrorResponse),
+      });
+      toast.error(getError(error as ErrorResponse));
+    }
+  };
+
+  useEffect(() => {
+    fetchAllEvents();
+  }, []);
+
+  // Handle category filter change
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category === "all" ? null : category);
+    const filteredData =
+      category === "all"
+        ? allData
+        : allData.filter((item) => item.category.name === category);
+    setDisplayedData(filteredData.slice(0, itemsPerPage));
+    dispatch({
+      type: "FETCH_SUCCESS",
+      payload: {
+        data: filteredData.slice(0, itemsPerPage),
+        page: 1,
+        totalPages: Math.ceil(filteredData.length / itemsPerPage),
+      },
+    });
+  };
+
+  // Load more function
+  const handleLoadMore = () => {
+    const nextPage = state.page + 1;
+    const startIndex = nextPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const newData = allData
+      .filter((item) =>
+        selectedCategory ? item.category.name === selectedCategory : true
+      )
+      .slice(startIndex, endIndex);
+    setDisplayedData((prev) => [...prev, ...newData]);
+    dispatch({
+      type: "FETCH_SUCCESS",
+      payload: {
+        data: [...state.data, ...newData],
+        page: nextPage,
+        totalPages: Math.ceil(allData.length / itemsPerPage),
+      },
+    });
+  };
+
+  // Toggle between "all market" and "comboblast"
+  const toggleTab = (tab: string) => {
+    setActiveTab(tab);
+  };
 
   // Navigate Menu
   const navigateTo = () => {
@@ -109,19 +111,17 @@ function Market() {
     showDrawer();
   };
 
-  //TOOGLE MODE
-  const [activeTab, setActiveTab] = useState("");
-  // Toggle between "all market" and "comboblast"
-  const toggleTab = (tab: string) => {
-    setActiveTab(tab);
-  };
   return (
     <div className="home_post market_post">
       <div className="home_component_content">
         <div className="filters">
-          <MarketFilters activeTab={activeTab} toggleTab={toggleTab} />
+          <MarketFilters
+            activeTab={activeTab}
+            toggleTab={toggleTab}
+            onCategoryFilter={handleCategoryFilter} // Pass filter handler
+          />
         </div>
-        <div className="post_itmes ">
+        <div className="post_itmes">
           <span className="all_combo f_flex">
             {/* ALL COMBO */}
             <span className="_combo">
@@ -130,23 +130,28 @@ function Market() {
                   activeTab === "combo_blast" && "grid_2"
                 }`}
               >
-                {List.map((item, index) => (
+                {displayedData.map((item, index) => (
                   <MarketCards
                     item={item}
-                    key={index}
+                    key={item.id}
                     index={index}
                     activeTab={activeTab}
                     toggleTab={toggleTab}
                   />
                 ))}
               </div>
-              <div className="load_more l_flex">
-                <div className="btn">
-                  <button className="main_btn l_fex">
-                    <p>Load More</p>
-                  </button>
+              {state.page < state.totalPages && (
+                <div className="load_more l_flex">
+                  <div className="btn">
+                    <button
+                      className="main_btn l_flex"
+                      onClick={handleLoadMore}
+                    >
+                      <p>Load More</p>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
             </span>
 
             {/* COMBO BLAST */}

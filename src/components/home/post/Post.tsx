@@ -5,29 +5,37 @@ import { useEffect, useReducer, useState } from "react";
 import {
   eventsReducer,
   initialEventState,
+  Event, // Ensure Event is imported
 } from "../../../types/events/list/eventlist";
-import { eventsRequest } from "../../../base url/BaseUrl";
+import axios from "axios";
 import { ErrorResponse, getError } from "../../../utilities/utils/Utils";
 import { toast } from "react-toastify";
+import { eventsRequest } from "../../../base url/BaseUrl";
 
 function Post() {
   const [state, dispatch] = useReducer(eventsReducer, initialEventState);
   const [activeTab, setActiveTab] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [allData, setAllData] = useState<Event[]>([]); 
+  const [displayedData, setDisplayedData] = useState<Event[]>([]);
+  const itemsPerPage = 9;
 
-  //=======================
-  // Fetch events function
-  //=======================
-  const fetchEvents = async (page: number) => {
+  //==========================
+  // Fetch all events function
+  //==========================
+  const fetchAllEvents = async () => {
     dispatch({ type: "FETCH_REQUEST" });
     try {
-      const response = await fetch(`${eventsRequest}?page=${page}`);
-      const result = await response.json();
+      const response = await axios.get(eventsRequest);
+      const result = response.data;
+      setAllData(result.data); 
+      setDisplayedData(result.data.slice(0, itemsPerPage)); // Display first page of data
       dispatch({
         type: "FETCH_SUCCESS",
         payload: {
-          data: result.data,
-          page: result.page,
-          totalPages: result.totalPages,
+          data: result.data.slice(0, itemsPerPage),
+          page: 1,
+          totalPages: Math.ceil(result.data.length / itemsPerPage),
         },
       });
     } catch (error) {
@@ -40,15 +48,46 @@ function Post() {
   };
 
   useEffect(() => {
-    fetchEvents(state.page);
-  }, [state.page]);
+    fetchAllEvents();
+  }, []);
+
+  // Handle category filter change
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category === "all" ? null : category);
+    const filteredData =
+      category === "all"
+        ? allData
+        : allData.filter((item) => item.category.name === category);
+    setDisplayedData(filteredData.slice(0, itemsPerPage));
+    dispatch({
+      type: "FETCH_SUCCESS",
+      payload: {
+        data: filteredData.slice(0, itemsPerPage),
+        page: 1,
+        totalPages: Math.ceil(filteredData.length / itemsPerPage),
+      },
+    });
+  };
 
   // Load more function
-  const handleLoadMore = async () => {
+  const handleLoadMore = () => {
     const nextPage = state.page + 1;
-    if (nextPage <= state.totalPages) {
-      await fetchEvents(nextPage);
-    }
+    const startIndex = nextPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const newData = allData
+      .filter((item) =>
+        selectedCategory ? item.category.name === selectedCategory : true
+      )
+      .slice(startIndex, endIndex);
+    setDisplayedData((prev) => [...prev, ...newData]);
+    dispatch({
+      type: "FETCH_SUCCESS",
+      payload: {
+        data: [...state.data, ...newData],
+        page: nextPage,
+        totalPages: Math.ceil(allData.length / itemsPerPage),
+      },
+    });
   };
 
   // Toggle between "all market" and "comboblast"
@@ -60,11 +99,15 @@ function Post() {
     <div className="home_post">
       <div className="home_component_content">
         <div className="filters">
-          <MarketFilters activeTab={activeTab} toggleTab={toggleTab} />
+          <MarketFilters
+            activeTab={activeTab}
+            toggleTab={toggleTab}
+            onCategoryFilter={handleCategoryFilter}
+          />
         </div>
         <div className="post_itmes">
           <div className="post_list">
-            {state.data.map((item, index) => (
+            {displayedData.map((item, index) => (
               <PostCards item={item} key={item.id} index={index} />
             ))}
           </div>
@@ -77,8 +120,6 @@ function Post() {
               </div>
             </div>
           )}
-          {/* {state.loading && <p>Loading...</p>}
-          {state.error && <p>Error: {state.error}</p>} */}
         </div>
       </div>
     </div>

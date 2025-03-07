@@ -2,13 +2,28 @@ export interface Event {
   id: string;
   title: string;
   description: string;
-  type: string;
+  type: "polar" | "multichoice";
   eventImage: string;
   answer: string;
+  pool: string;
   startTime: string;
   endTime: string;
   createdAt: string;
   updatedAt: string;
+  options: {
+    id: string;
+    name: string;
+    imageUrl?: string;
+    playerCount: number;
+    bonusOdds?: number;
+  }[];
+  category: {
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  totalPlayers: number;
 }
 
 interface EventListState {

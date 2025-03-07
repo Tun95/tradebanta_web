@@ -21,26 +21,34 @@ import {
 } from "../../../common/icons/Icons";
 import { BpCheckedIcon, BpIcon } from "../../../utilities/component/component";
 
-type Candidate = {
+type Option = {
   id: string;
   name: string;
-  image: string;
-  percentage: number;
+  imageUrl?: string; // Optional image URL for multichoice options
+  playerCount: number;
+  bonusOdds?: number; // Optional bonus odds for multichoice options
 };
 
 type PostItem = {
-  id: number;
+  id: string;
   title: string;
-  image: string;
-  slug: string;
-  endsIn: string;
-  category: string;
-  pool: number;
-  comments: number;
-  type: "election" | "event";
-  yesPercentage?: number;
-  noPercentage?: number;
-  candidates?: Candidate[];
+  description: string;
+  type: "polar" | "multichoice";
+  eventImage: string;
+  answer: string;
+  pool: string;
+  startTime: string;
+  endTime: string;
+  createdAt: string;
+  updatedAt: string;
+  options: Option[];
+  category: {
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  totalPlayers: number;
 };
 
 interface PostCardsProps {
@@ -53,17 +61,24 @@ const PostCards: FC<PostCardsProps> = ({ item, index }) => {
   const { state } = useAppContext();
   const { theme } = state;
 
-  const [isCandidatesOpen, setIsCandidatesOpen] = useState(false);
-  const [selectedCandidate, setSelectedCandidate] = useState<string | null>(
-    null
-  );
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const toggleCandidatesList = () => {
-    setIsCandidatesOpen((prevState) => !prevState);
+  const toggleOptionsList = () => {
+    setIsOptionsOpen((prevState) => !prevState);
   };
 
-  const handleCandidateSelect = (candidateId: string) => {
-    setSelectedCandidate((prev) => (prev === candidateId ? null : candidateId));
+  const handleOptionSelect = (optionId: string) => {
+    setSelectedOption((prev) => (prev === optionId ? null : optionId));
+  };
+
+  // Calculate time remaining until the event ends
+  const calculateTimeRemaining = (endTime: string) => {
+    const endDate = new Date(endTime);
+    const now = new Date();
+    const diff = endDate.getTime() - now.getTime();
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    return `${hours} hours`;
   };
 
   return (
@@ -74,19 +89,21 @@ const PostCards: FC<PostCardsProps> = ({ item, index }) => {
       <div className="post_card_content">
         <div className="avater_catgory_end_in a_flex">
           <div className="avater bg_item">
-            <img src={item?.image} alt="" />
+            <img src={item.eventImage} alt={item.title} />
           </div>
           <div className="category">
-            <small className="bg_item">{item.category}</small>
+            <small className="bg_item">{item.category.name}</small>
           </div>
           <div className="end_in">
-            <small className="bg_item">Ends in 11 hours</small>
+            <small className="bg_item">
+              Ends in {calculateTimeRemaining(item.endTime)}
+            </small>
           </div>
         </div>
         <div className="title">
           <TruncateMarkup lines={2}>
             <h4>
-              <Link to={`/market/${item.slug}`} onClick={onClose}>
+              <Link to={`/market/${item.id}`} onClick={onClose}>
                 {item.title}
               </Link>
             </h4>
@@ -96,12 +113,13 @@ const PostCards: FC<PostCardsProps> = ({ item, index }) => {
           <small className="left a_flex">
             <div className="pool a_flex">
               <HugeiconsInvoice className="icon" />
-              <p>Pool: {formatNairaNoDecimalShort(item.pool)}</p>
+              <p>Pool: {formatNairaNoDecimalShort(parseFloat(item.pool))}</p>
             </div>
-            <div className="comment a_flex">
+            {/* Comments are not present in the data */}
+            {/* <div className="comment a_flex">
               <HugeiconsBubbleChat className="icon" />
               <p>{formatNumberNoDecimalShort(item.comments)}</p>
-            </div>
+            </div> */}
           </small>
           <small className="right a_flex">
             <div className="save a_flex">
@@ -111,9 +129,9 @@ const PostCards: FC<PostCardsProps> = ({ item, index }) => {
             <div className="re_share">
               <RWebShare
                 data={{
-                  text: `${item?.title}`,
-                  url: `${pageURL}/bills/${item?.slug}`,
-                  title: item?.title,
+                  text: `${item.title}`,
+                  url: `${pageURL}/market/${item.id}`,
+                  title: item.title,
                 }}
               >
                 <div className="share a_flex">
@@ -127,45 +145,51 @@ const PostCards: FC<PostCardsProps> = ({ item, index }) => {
 
         {/* Conditional Rendering */}
         <div className="conditional_redering">
-          {" "}
           <div className="vote_btn">
-            {item.type === "election" ? (
+            {item.type === "multichoice" ? (
               <div className="select_btn">
-                <button className="main_btn" onClick={toggleCandidatesList}>
+                <button
+                  className={isOptionsOpen ? "main_btn p_bottom" : "main_btn "}
+                  onClick={toggleOptionsList}
+                >
                   <small className="c_flex">
                     <p>Select Prediction</p>
-                    {isCandidatesOpen ? (
+                    {isOptionsOpen ? (
                       <KeyboardArrowUpIcon className="icon" />
                     ) : (
                       <KeyboardArrowDownIcon className="icon" />
                     )}
                   </small>
                 </button>
-                {isCandidatesOpen && (
+                {isOptionsOpen && (
                   <div className="candidates">
                     <ul className="list">
-                      {item.candidates?.map((candidate) => (
+                      {item.options.map((option) => (
                         <li
-                          key={candidate.id}
+                          key={option.id}
                           className="c_flex"
-                          onClick={() => handleCandidateSelect(candidate.id)}
+                          onClick={() => handleOptionSelect(option.id)}
                         >
-                          <label htmlFor={candidate.id} className="c_flex">
+                          <label htmlFor={option.id} className="c_flex">
                             <div className="left a_flex">
-                              <div className="icon">
-                                <img
-                                  src={candidate.image}
-                                  alt="candidate_img"
-                                />
-                              </div>
-                              <small>{candidate.name}</small>
+                              {option.imageUrl && (
+                                <div className="icon">
+                                  <img
+                                    src={option.imageUrl}
+                                    alt={option.name}
+                                  />
+                                </div>
+                              )}
+                              <small>{option.name}</small>
                             </div>
                             <div className="right a_flex">
-                              <small>
-                                <p className="percentage">
-                                  {candidate.percentage}%
-                                </p>
-                              </small>
+                              {option.bonusOdds && (
+                                <small>
+                                  <p className="bonusOdds">
+                                    {option.bonusOdds}x
+                                  </p>
+                                </small>
+                              )}
                               <span
                                 onClick={(event) => event.stopPropagation()} // Prevent parent onClick
                               >
@@ -179,10 +203,8 @@ const PostCards: FC<PostCardsProps> = ({ item, index }) => {
                                   color="default"
                                   checkedIcon={<BpCheckedIcon />} // Checked state
                                   icon={<BpIcon />} // Default state
-                                  checked={selectedCandidate === candidate.id}
-                                  onChange={() =>
-                                    handleCandidateSelect(candidate.id)
-                                  }
+                                  checked={selectedOption === option.id}
+                                  onChange={() => handleOptionSelect(option.id)}
                                 />
                               </span>
                             </div>
@@ -197,12 +219,12 @@ const PostCards: FC<PostCardsProps> = ({ item, index }) => {
               <div className="yes_no_btn c_flex">
                 <div className="yes_btn">
                   <button className="main_btn l_flex">
-                    Yes ({item.yesPercentage}%)
+                    Yes {/* Percentage not available in the data */}
                   </button>
                 </div>
                 <div className="no_btn">
                   <button className="main_btn l_flex">
-                    No ({item.noPercentage}%)
+                    No {/* Percentage not available in the data */}
                   </button>
                 </div>
               </div>

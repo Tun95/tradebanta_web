@@ -130,23 +130,17 @@ export function EmailOtpVerificationDropDownMenu({
     try {
       dispatch({ type: "SUBMIT_REQUEST" });
 
-      // Retrieve temporary user info from local storage
       const temporaryUserInfo = JSON.parse(
         localStorage.getItem("temporaryUserInfo") || "{}"
       );
 
-      const { data } = await axios.put(
-        `${authRequest}/api/users/verify-otp`,
-        {
-          otp: values.otp,
-        },
-        {
-          headers: { Authorization: `Bearer ${temporaryUserInfo.token}` },
-        }
-      );
+      const { data } = await axios.post(`${authRequest}/verify-otp`, {
+        otp: values.otp,
+        email: temporaryUserInfo.email,
+      });
 
       dispatch({ type: "SUBMIT_SUCCESS", payload: data });
-      toast.success("OTP verified, account created successfully", {
+      toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
       setTimeout(() => {
@@ -179,9 +173,8 @@ export function EmailOtpVerificationDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${authRequest}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/request-otp`, {
           email: temporaryUserInfo.email,
-          phone: temporaryUserInfo.phone,
         });
 
         toast.success("Verification email resent successfully", {
@@ -392,23 +385,17 @@ export function SendEmailOtpDropDownMenu({
     try {
       dispatch({ type: "SUBMIT_REQUEST" });
 
-      // Retrieve temporary user info from local storage
       const temporaryUserInfo = JSON.parse(
         localStorage.getItem("temporaryUserInfo") || "{}"
       );
 
-      const { data } = await axios.put(
-        `${authRequest}/api/users/verify-otp`,
-        {
-          otp: values.otp,
-        },
-        {
-          headers: { Authorization: `Bearer ${temporaryUserInfo.token}` },
-        }
-      );
+      const { data } = await axios.post(`${authRequest}/verify-otp`, {
+        otp: values.otp,
+        email: temporaryUserInfo.email,
+      });
 
       dispatch({ type: "SUBMIT_SUCCESS", payload: data });
-      toast.success("OTP verified, account created successfully", {
+      toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
       setTimeout(() => {
@@ -441,9 +428,8 @@ export function SendEmailOtpDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${authRequest}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/request-otp`, {
           email: temporaryUserInfo.email,
-          phone: temporaryUserInfo.phone,
         });
 
         toast.success("Verification email resent successfully", {
@@ -694,23 +680,17 @@ export function SendMobileOtpDropDownMenu({
     try {
       dispatch({ type: "SUBMIT_REQUEST" });
 
-      // Retrieve temporary user info from local storage
       const temporaryUserInfo = JSON.parse(
         localStorage.getItem("temporaryUserInfo") || "{}"
       );
 
-      const { data } = await axios.put(
-        `${authRequest}/api/users/verify-otp`,
-        {
-          otp: values.otp,
-        },
-        {
-          headers: { Authorization: `Bearer ${temporaryUserInfo.token}` },
-        }
-      );
+      const { data } = await axios.post(`${authRequest}/verify-otp`, {
+        otp: values.otp,
+        email: temporaryUserInfo.email,
+      });
 
       dispatch({ type: "SUBMIT_SUCCESS", payload: data });
-      toast.success("OTP verified, account created successfully", {
+      toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
       setTimeout(() => {
@@ -743,9 +723,8 @@ export function SendMobileOtpDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${authRequest}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/request-otp`, {
           email: temporaryUserInfo.email,
-          phone: temporaryUserInfo.phone,
         });
 
         toast.success("Verification email resent successfully", {
@@ -996,23 +975,17 @@ export function MobileOtpVerificationDropDownMenu({
     try {
       dispatch({ type: "SUBMIT_REQUEST" });
 
-      // Retrieve temporary user info from local storage
       const temporaryUserInfo = JSON.parse(
         localStorage.getItem("temporaryUserInfo") || "{}"
       );
 
-      const { data } = await axios.put(
-        `${authRequest}/api/users/verify-otp`,
-        {
-          otp: values.otp,
-        },
-        {
-          headers: { Authorization: `Bearer ${temporaryUserInfo.token}` },
-        }
-      );
+      const { data } = await axios.post(`${authRequest}/verify-otp`, {
+        otp: values.otp,
+        email: temporaryUserInfo.email,
+      });
 
       dispatch({ type: "SUBMIT_SUCCESS", payload: data });
-      toast.success("OTP verified, account created successfully", {
+      toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
       setTimeout(() => {
@@ -1045,9 +1018,8 @@ export function MobileOtpVerificationDropDownMenu({
 
       if (temporaryUserInfo && temporaryUserInfo.email) {
         // Your logic to resend OTP
-        await axios.post(`${authRequest}/api/users/otp-verification`, {
+        await axios.post(`${authRequest}/request-otp`, {
           email: temporaryUserInfo.email,
-          phone: temporaryUserInfo.phone,
         });
 
         toast.success("Verification email resent successfully", {
