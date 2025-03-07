@@ -35,9 +35,9 @@ function Post() {
           )
         : result.data;
 
-      console.log("Filtered Data Length:", filteredData.length); // Debugging
+      console.log("Filtered Data Length:", filteredData.length);
       const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-      console.log("Total Pages:", totalPages); // Debugging
+      console.log("Total Pages:", totalPages);
 
       dispatch({
         type: "FETCH_SUCCESS",
@@ -84,15 +84,15 @@ function Post() {
       ? allData.filter((item: Event) => item.category.name === selectedCategory)
       : allData;
 
-    console.log("Filtered Data Length:", filteredData.length); // Debugging
+    console.log("Filtered Data Length:", filteredData.length);
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-    console.log("Total Pages:", totalPages); // Debugging
+    console.log("Total Pages:", totalPages);
 
     const newData = filteredData.slice(startIndex, endIndex);
     dispatch({
       type: "FETCH_SUCCESS",
       payload: {
-        data: newData, // Append new data
+        data: newData,
         page: nextPage,
         totalPages: totalPages,
       },
