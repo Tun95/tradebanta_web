@@ -3,7 +3,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {
   formatNairaNoDecimalShort,
-  formatNumberNoDecimalShort,
+  // formatNumberNoDecimalShort,
   useAppContext,
 } from "../../../utilities/utils/Utils";
 import { Link } from "react-router-dom";
@@ -15,7 +15,7 @@ import { Checkbox as MyCheckbox } from "@mui/material";
 import TruncateMarkup from "react-truncate-markup";
 import {
   HugeiconsBookmark02,
-  HugeiconsBubbleChat,
+  // HugeiconsBubbleChat,
   HugeiconsInvoice,
   HugeiconsShare03,
 } from "../../../common/icons/Icons";

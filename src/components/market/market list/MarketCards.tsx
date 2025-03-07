@@ -120,7 +120,10 @@ const MarketCards: FC<MarketCardsProps> = ({ item, index, toggleTab }) => {
           <div className="vote_btn">
             {item.type === "multichoice" ? (
               <div className="select_btn">
-                <button className="main_btn" onClick={toggleOptionsList}>
+                <button
+                  className={isOptionsOpen ? "main_btn p_bottom" : "main_btn "}
+                  onClick={toggleOptionsList}
+                >
                   <small className="c_flex">
                     <p>Select Prediction</p>
                     {isOptionsOpen ? (
@@ -131,7 +134,7 @@ const MarketCards: FC<MarketCardsProps> = ({ item, index, toggleTab }) => {
                   </small>
                 </button>
                 {isOptionsOpen && (
-                  <div className="options">
+                  <div className="candidates">
                     <ul className="list">
                       {item.options.map((option) => (
                         <li

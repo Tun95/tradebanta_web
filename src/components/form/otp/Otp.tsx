@@ -143,9 +143,9 @@ export function EmailOtpVerificationDropDownMenu({
       toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
-      setTimeout(() => {
-        actions.resetForm();
-      }, 2000);
+
+      // Reset the form immediately after successful submission
+      actions.resetForm();
 
       // Call the function here and pass the isAccountVerified value
       handleVerifiedOTP(data.isAccountVerified);
@@ -398,9 +398,9 @@ export function SendEmailOtpDropDownMenu({
       toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
-      setTimeout(() => {
-        actions.resetForm();
-      }, 2000);
+
+      // Reset the form immediately after successful submission
+      actions.resetForm();
 
       // Call the function here and pass the isAccountVerified value
       handleVerifiedOTP(data.isAccountVerified);
@@ -693,9 +693,9 @@ export function SendMobileOtpDropDownMenu({
       toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
-      setTimeout(() => {
-        actions.resetForm();
-      }, 2000);
+
+      // Reset the form immediately after successful submission
+      actions.resetForm();
 
       // Call the function here and pass the isAccountVerified value
       handleVerifiedOTP(data.isAccountVerified);
@@ -988,9 +988,9 @@ export function MobileOtpVerificationDropDownMenu({
       toast.success("OTP verified successfully", {
         position: "bottom-center",
       });
-      setTimeout(() => {
-        actions.resetForm();
-      }, 2000);
+
+      // Reset the form immediately after successful submission
+      actions.resetForm();
 
       // Call the function here and pass the isAccountVerified value
       handleVerifiedOTP(data.isAccountVerified);
