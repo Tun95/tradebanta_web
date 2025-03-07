@@ -17,17 +17,17 @@ function NavBar() {
   const {
     state,
     handleClickMenu,
-    showDrawer, setMenu
+    // showDrawer, setMenu
   } = useAppContext();
   const { theme } = state;
 
   const location = useLocation();
 
    // Navigate Menu
-    const navigateTo = () => {
-      setMenu("editEmail");
-      showDrawer();
-    };
+    // const navigateTo = () => {
+    //   setMenu("webthree_email");
+    //   showDrawer();
+    // };
 
   // Function to check if a link is active
   const isActive = (path: string): boolean => location.pathname === path;
@@ -136,11 +136,11 @@ function NavBar() {
                 </div>
               </div>
 
-              <div className="btn">
+              {/* <div className="btn">
                 <button className="main_btn l_flex" onClick={navigateTo}>
                   Login/Register
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
