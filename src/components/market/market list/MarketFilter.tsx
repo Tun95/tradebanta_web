@@ -51,7 +51,7 @@ function MarketFilters({
   // Handle category filter change
   const handleTypeChange = (value: string) => {
     setSelectedType(value);
-    onCategoryFilter(value); // Call the parent's filter handler
+    onCategoryFilter(value); 
   };
 
   // NAVIGATE
