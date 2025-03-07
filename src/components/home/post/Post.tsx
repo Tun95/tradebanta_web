@@ -5,37 +5,46 @@ import { useEffect, useReducer, useState } from "react";
 import {
   eventsReducer,
   initialEventState,
-  Event, // Ensure Event is imported
+  Event,
 } from "../../../types/events/list/eventlist";
 import axios from "axios";
 import { ErrorResponse, getError } from "../../../utilities/utils/Utils";
 import { toast } from "react-toastify";
 import { eventsRequest } from "../../../base url/BaseUrl";
+import LoadingBox from "../../../utilities/message loading/LoadingBox";
+import MessageBox from "../../../utilities/message loading/MessageBox";
 
 function Post() {
   const [state, dispatch] = useReducer(eventsReducer, initialEventState);
   const [activeTab, setActiveTab] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [allData, setAllData] = useState<Event[]>([]); 
-  const [displayedData, setDisplayedData] = useState<Event[]>([]);
-  const itemsPerPage = 9;
+  const [allData, setAllData] = useState<Event[]>([]);
+  const itemsPerPage = 10;
 
-  //==========================
-  // Fetch all events function
-  //==========================
+  // Fetch all events
   const fetchAllEvents = async () => {
     dispatch({ type: "FETCH_REQUEST" });
     try {
       const response = await axios.get(eventsRequest);
       const result = response.data;
-      setAllData(result.data); 
-      setDisplayedData(result.data.slice(0, itemsPerPage)); // Display first page of data
+      setAllData(result.data); // Store all data
+
+      const filteredData = selectedCategory
+        ? result.data.filter(
+            (item: Event) => item.category.name === selectedCategory
+          )
+        : result.data;
+
+      console.log("Filtered Data Length:", filteredData.length); // Debugging
+      const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+      console.log("Total Pages:", totalPages); // Debugging
+
       dispatch({
         type: "FETCH_SUCCESS",
         payload: {
-          data: result.data.slice(0, itemsPerPage),
-          page: 1,
-          totalPages: Math.ceil(result.data.length / itemsPerPage),
+          data: filteredData.slice(0, itemsPerPage), // Only the first page of data
+          page: 1, // Reset page to 1
+          totalPages: totalPages,
         },
       });
     } catch (error) {
@@ -49,24 +58,20 @@ function Post() {
 
   useEffect(() => {
     fetchAllEvents();
-  }, []);
+  }, [selectedCategory]); // Refetch when category changes
 
   // Handle category filter change
   const handleCategoryFilter = (category: string) => {
     setSelectedCategory(category === "all" ? null : category);
-    const filteredData =
-      category === "all"
-        ? allData
-        : allData.filter((item) => item.category.name === category);
-    setDisplayedData(filteredData.slice(0, itemsPerPage));
     dispatch({
       type: "FETCH_SUCCESS",
       payload: {
-        data: filteredData.slice(0, itemsPerPage),
-        page: 1,
-        totalPages: Math.ceil(filteredData.length / itemsPerPage),
+        data: [], // Clear existing data
+        page: 1, // Reset page to 1
+        totalPages: 1, // Reset totalPages to 1
       },
     });
+    fetchAllEvents(); // Refetch data
   };
 
   // Load more function
@@ -74,18 +79,22 @@ function Post() {
     const nextPage = state.page + 1;
     const startIndex = nextPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const newData = allData
-      .filter((item) =>
-        selectedCategory ? item.category.name === selectedCategory : true
-      )
-      .slice(startIndex, endIndex);
-    setDisplayedData((prev) => [...prev, ...newData]);
+
+    const filteredData = selectedCategory
+      ? allData.filter((item: Event) => item.category.name === selectedCategory)
+      : allData;
+
+    console.log("Filtered Data Length:", filteredData.length); // Debugging
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    console.log("Total Pages:", totalPages); // Debugging
+
+    const newData = filteredData.slice(startIndex, endIndex);
     dispatch({
       type: "FETCH_SUCCESS",
       payload: {
-        data: [...state.data, ...newData],
+        data: newData, // Append new data
         page: nextPage,
-        totalPages: Math.ceil(allData.length / itemsPerPage),
+        totalPages: totalPages,
       },
     });
   };
@@ -106,19 +115,34 @@ function Post() {
           />
         </div>
         <div className="post_itmes">
-          <div className="post_list">
-            {displayedData.map((item, index) => (
-              <PostCards item={item} key={item.id} index={index} />
-            ))}
-          </div>
-          {state.page < state.totalPages && (
-            <div className="load_more l_flex">
-              <div className="btn">
-                <button className="main_btn l_flex" onClick={handleLoadMore}>
-                  <p>Load More</p>
-                </button>
-              </div>
+          {state.loading ? (
+            <LoadingBox />
+          ) : state.error ? (
+            <MessageBox variant="danger">{state.error}</MessageBox>
+          ) : state.data.length === 0 ? (
+            <div className="no_review l_flex">
+              <p>No Events Found</p>
             </div>
+          ) : (
+            <>
+              <div className="post_list">
+                {state.data.map((item, index) => (
+                  <PostCards item={item} key={item.id} index={index} />
+                ))}
+              </div>
+              {state.totalPages > 0 && (
+                <div className="load_more l_flex">
+                  <div className="btn">
+                    <button
+                      className="main_btn l_flex"
+                      onClick={handleLoadMore}
+                    >
+                      <p>Load More</p>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

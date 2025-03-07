@@ -65,7 +65,10 @@ export const eventsReducer = (
       return {
         ...state,
         loading: false,
-        data: [...state.data, ...action.payload.data],
+        data:
+          action.payload.page === 1
+            ? action.payload.data
+            : [...state.data, ...action.payload.data], // Replace data for page 1, append for subsequent pages
         page: action.payload.page,
         totalPages: action.payload.totalPages,
       };

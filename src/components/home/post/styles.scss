@@ -461,3 +461,15 @@
     }
   }
 }
+
+//=========
+.no_review {
+  margin-top: 15px;
+  width: 100%;
+  min-height: 150px;
+  background-color: var(--color-border);
+  border-radius: 8px;
+  p {
+    font-weight: 600;
+  }
+}

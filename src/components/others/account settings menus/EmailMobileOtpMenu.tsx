@@ -205,7 +205,7 @@ export function VerifyEmailOtpMenu() {
       );
 
       const { data } = await axios.put(
-        `${authRequest}/api/users/verify-otp`,
+        `${authRequest}/verify-otp`,
         {
           otp: values.otp,
         },

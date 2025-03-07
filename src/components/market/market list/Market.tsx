@@ -15,6 +15,8 @@ import {
   initialEventState,
   Event,
 } from "../../../types/events/list/eventlist";
+import LoadingBox from "../../../utilities/message loading/LoadingBox";
+import MessageBox from "../../../utilities/message loading/MessageBox";
 
 function Market() {
   const { state: appState } = useAppContext();
@@ -125,21 +127,33 @@ function Market() {
           <span className="all_combo f_flex">
             {/* ALL COMBO */}
             <span className="_combo">
-              <div
-                className={`post_list  ${
-                  activeTab === "combo_blast" && "grid_2"
-                }`}
-              >
-                {displayedData.map((item, index) => (
-                  <MarketCards
-                    item={item}
-                    key={item.id}
-                    index={index}
-                    activeTab={activeTab}
-                    toggleTab={toggleTab}
-                  />
-                ))}
-              </div>
+              {state.loading ? (
+                <LoadingBox />
+              ) : state.error ? (
+                <MessageBox variant="danger">{state.error}</MessageBox>
+              ) : displayedData.length === 0 ? (
+                <div className="no_review l_flex">
+                  <p>No Events Found</p>
+                </div>
+              ) : (
+                <>
+                  <div
+                    className={`post_list  ${
+                      activeTab === "combo_blast" && "grid_2"
+                    }`}
+                  >
+                    {displayedData.map((item, index) => (
+                      <MarketCards
+                        item={item}
+                        key={item.id}
+                        index={index}
+                        activeTab={activeTab}
+                        toggleTab={toggleTab}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
               {state.page < state.totalPages && (
                 <div className="load_more l_flex">
                   <div className="btn">
