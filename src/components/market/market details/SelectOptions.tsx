@@ -1,11 +1,22 @@
 import { Radio } from "antd";
 import { useAppContext } from "../../../utilities/utils/Utils";
-import c1 from "../../../assets/home/c1.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState, useEffect } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-function SelectOptions() {
+interface Option {
+  id: string;
+  name: string;
+  imageUrl?: string;
+  playerCount: number;
+  bonusOdds?: number;
+}
+
+interface SelectOptionsProps {
+  options: Option[]; // Accept options as a prop
+}
+
+function SelectOptions({ options }: SelectOptionsProps) {
   const { state } = useAppContext();
   const { theme } = state;
 
@@ -61,38 +72,29 @@ function SelectOptions() {
         {isCandidatesOpen && (
           <div className="candidates">
             <ul className="list">
-              <li className="c_flex">
-                <label htmlFor="candidateA" className="c_flex">
-                  <div className="left a_flex">
-                    <div className="icon">
-                      <img src={c1} alt="candidate_img" />
+              {options.map((option) => (
+                <li key={option.id} className="c_flex">
+                  <label htmlFor={`candidate-${option.id}`} className="c_flex">
+                    <div className="left a_flex">
+                      <div className="icon">
+                        <img
+                          src={
+                            option.imageUrl || "https://via.placeholder.com/50"
+                          } // Fallback image if imageUrl is missing
+                          alt={option.name}
+                        />
+                      </div>
+                      <small>{option.name}</small>
                     </div>
-                    <small>Candidate A</small>
-                  </div>
-                  <div className="right a_flex">
-                    <small>
-                      <p className="percentage">80%</p>
-                    </small>
-                    <Radio className="radio" id="candidateA"></Radio>
-                  </div>
-                </label>
-              </li>
-              <li className="c_flex">
-                <label htmlFor="candidateB" className="c_flex">
-                  <div className="left a_flex">
-                    <div className="icon">
-                      <img src={c1} alt="candidate_img" />
+                    <div className="right a_flex">
+                      <small>
+                        <p className="percentage">{option.playerCount}%</p>
+                      </small>
+                      <Radio className="radio" id={`candidate-${option.id}`} />
                     </div>
-                    <small>Candidate B</small>
-                  </div>
-                  <div className="right a_flex">
-                    <small>
-                      <p className="percentage">70%</p>
-                    </small>
-                    <Radio className="radio" id="candidateB"></Radio>
-                  </div>
-                </label>
-              </li>
+                  </label>
+                </li>
+              ))}
             </ul>
           </div>
         )}

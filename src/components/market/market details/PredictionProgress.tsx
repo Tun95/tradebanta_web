@@ -11,6 +11,7 @@ import wc from "../../../assets/others/wc.png";
 import SquareIcon from "@mui/icons-material/Square";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import c1 from "../../../assets/home/c1.png";
+import { EventDetails } from "../../../types/events/details/eventDetail";
 
 const List = [
   {
@@ -43,7 +44,11 @@ const List = [
   },
 ];
 
-function PredictionProgress() {
+interface PredictionProgressProps {
+  event: EventDetails | null;
+}
+
+function PredictionProgress({}: PredictionProgressProps) {
   const { state } = useAppContext();
   const { theme } = state;
 

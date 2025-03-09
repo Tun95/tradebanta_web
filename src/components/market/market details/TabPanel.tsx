@@ -3,8 +3,12 @@ import "./styles.scss";
 import Comment from "./tabs/Comment";
 import RecentTrades from "./tabs/RecentTrades";
 import RulesTab from "./tabs/Rules";
+import { EventDetails } from "../../../types/events/details/eventDetail";
 
-function TabPanel() {
+interface TabPanelProps {
+  event: EventDetails | null;
+}
+function TabPanel({}: TabPanelProps) {
   //TOOGLE MODE
   const [activeTypeTab, setActiveTypeTab] = useState("comment");
   // Toggle between "all market" and "comboblast"

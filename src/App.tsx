@@ -52,7 +52,7 @@ function App() {
           <Route path="*" element={<NotFoundScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/market" element={<MarketListScreen />} />
-          <Route path="/market/:slug" element={<MarketDetailScreen />} />
+          <Route path="/market/:id" element={<MarketDetailScreen />} />
           <Route path="/bookmarks" element={<BookmarkScreen />} />
           <Route path="/leaderboard" element={<LeaderboardScreen />} />
           <Route
