@@ -1,8 +1,9 @@
-import { Radio } from "antd";
 import { useAppContext } from "../../../utilities/utils/Utils";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState, useEffect } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Checkbox as MyCheckbox } from "@mui/material";
+import { BpCheckedIcon, BpIcon } from "../../../utilities/component/component";
 
 interface Option {
   id: string;
@@ -21,6 +22,7 @@ function SelectOptions({ options }: SelectOptionsProps) {
   const { theme } = state;
 
   const [isCandidatesOpen, setIsCandidatesOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   useEffect(() => {
     // Check screen size on initial render
@@ -50,6 +52,10 @@ function SelectOptions({ options }: SelectOptionsProps) {
     }
   };
 
+  const handleOptionSelect = (optionId: string) => {
+    setSelectedOption((prev) => (prev === optionId ? null : optionId));
+  };
+
   return (
     <div
       className={`select_options_component ${
@@ -73,14 +79,18 @@ function SelectOptions({ options }: SelectOptionsProps) {
           <div className="candidates">
             <ul className="list">
               {options.map((option) => (
-                <li key={option.id} className="c_flex">
+                <li
+                  key={option.id}
+                  className="c_flex"
+                  onClick={() => handleOptionSelect(option.id)}
+                >
                   <label htmlFor={`candidate-${option.id}`} className="c_flex">
                     <div className="left a_flex">
                       <div className="icon">
                         <img
                           src={
                             option.imageUrl || "https://via.placeholder.com/50"
-                          } // Fallback image if imageUrl is missing
+                          }
                           alt={option.name}
                         />
                       </div>
@@ -90,7 +100,24 @@ function SelectOptions({ options }: SelectOptionsProps) {
                       <small>
                         <p className="percentage">{option.playerCount}%</p>
                       </small>
-                      <Radio className="radio" id={`candidate-${option.id}`} />
+                      <span onClick={(event) => event.stopPropagation()}>
+                        <MyCheckbox
+                          sx={{
+                            padding: 0,
+                            marginRight: 1,
+                            "&:hover": { bgcolor: "transparent" },
+                          }}
+                          disableRipple
+                          color="default"
+                          checkedIcon={<BpCheckedIcon />} // Checked state
+                          icon={<BpIcon />} // Default state
+                          checked={selectedOption === option.id}
+                          onChange={() => handleOptionSelect(option.id)}
+                          inputProps={{
+                            "aria-label": `Select ${option.name}`,
+                          }}
+                        />
+                      </span>
                     </div>
                   </label>
                 </li>

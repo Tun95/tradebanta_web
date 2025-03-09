@@ -64,7 +64,7 @@ function MarketDetailScreen() {
   return (
     <>
       <Helmet>
-        <title>Market :: </title>
+        <title>{event ? `Market :: ${event.title}` : "Market"}</title>
       </Helmet>
       <NavBar />
       <div className="market_details_screen main_style_screen">
@@ -73,7 +73,7 @@ function MarketDetailScreen() {
             <LoadingBox />
           ) : error ? (
             <MessageBox variant="danger">{state.error}</MessageBox>
-          ) : event ? (
+          ) : event && (
             <div className="market_content f_flex">
               <div className="left_boxes">
                 <Details event={event} />
@@ -107,9 +107,7 @@ function MarketDetailScreen() {
                 </div>
               </div>
             </div>
-          ) : (
-            <div>No event data available</div>
-          )}
+          ) }
         </div>
       </div>
       <Footer />

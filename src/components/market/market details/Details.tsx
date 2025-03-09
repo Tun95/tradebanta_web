@@ -5,6 +5,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import l1 from "../../../assets/home/l1.png";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { EventDetails } from "../../../types/events/details/eventDetail";
+import { RWebShare } from "react-web-share";
+import { pageURL } from "../../../base url/BaseUrl";
 
 interface DetailsProps {
   event: EventDetails | null;
@@ -58,11 +60,19 @@ function Details({ event }: DetailsProps) {
                       <BookmarkIcon className="icon red" />
                     </small>
                   </button>
-                  <button className="main_btn">
-                    <small className="a_flex">
-                      <i className="fa-solid fa-share-from-square"></i>
-                      <p>Share Game</p>
-                    </small>
+                  <button className="main_btn share_btn l_flex">
+                    <RWebShare
+                      data={{
+                        text: `${event?.title}`,
+                        url: `${pageURL}/market/${event?.id}`,
+                        title: event?.title,
+                      }}
+                    >
+                      <small className="a_flex">
+                        <i className="fa-solid fa-share-from-square"></i>
+                        <p>Share Game</p>
+                      </small>
+                    </RWebShare>
                   </button>
                 </div>
               </div>
@@ -141,11 +151,19 @@ function Details({ event }: DetailsProps) {
                   <p>Remove Bookmark</p>
                 </small>
               </button> */}
-              <button className="main_btn">
-                <small className="a_flex">
-                  <i className="fa-solid fa-share-from-square"></i>
-                  <p>Share Game</p>
-                </small>
+              <button className="main_btn share_btn l_flex">
+                <RWebShare
+                  data={{
+                    text: `${event?.title}`,
+                    url: `${pageURL}/market/${event?.id}`,
+                    title: event?.title,
+                  }}
+                >
+                  <small className="a_flex">
+                    <i className="fa-solid fa-share-from-square"></i>
+                    <p>Share Game</p>
+                  </small>
+                </RWebShare>
               </button>
             </div>
           </div>

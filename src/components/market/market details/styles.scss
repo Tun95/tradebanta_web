@@ -113,6 +113,13 @@
     .bottom {
       padding: 15px 0px;
       gap: 10px;
+      .share_btn {
+        padding: 0px !important;
+        height: 28px !important;
+        small {
+          padding: 6.5px 15px !important;
+        }
+      }
       .left {
         .btns {
           // flex-wrap: wrap;
@@ -139,6 +146,7 @@
           }
         }
       }
+
       /*======= MEDIA QUERIES (LARGE DEVICES) =======*/
       @media screen and (max-width: 1500px) {
         gap: 4px;
@@ -506,11 +514,17 @@
       }
     }
     .candidates {
-      padding: 5px;
+      padding: 10px;
       .list {
         background-color: var(--color-white);
         padding: 1px 10px;
         border-radius: 15px;
+        height: 150px;
+        overflow: hidden;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
         li {
           border: 1px solid var(--color-border);
           padding: 5px 10px;
@@ -546,6 +560,10 @@
               }
             }
           }
+        }
+        /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+        @media screen and (max-width: 450px) {
+          height: 100%;
         }
       }
     }
