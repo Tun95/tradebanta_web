@@ -23,12 +23,13 @@ function NavBar() {
 
   const location = useLocation();
 
-   // Navigate Menu
-    // const navigateTo = () => {
-    //   setMenu("webthree_email");
-    //   showDrawer();
-    // };
+  // Navigate Menu
+  // const navigateTo = () => {
+  //   setMenu("webthree_email");
+  //   showDrawer();
+  // };
 
+  //===========
   // Function to check if a link is active
   const isActive = (path: string): boolean => location.pathname === path;
 
