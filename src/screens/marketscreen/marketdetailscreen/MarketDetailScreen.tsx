@@ -32,7 +32,9 @@ function MarketDetailScreen() {
             </div>
             <div className="right_boxes">
               <div className="pred_box">
-                {/* <SelectOptions /> */}
+                {/* Type: MultiChoice */}
+                <SelectOptions />
+                {/* Type: Polar */}
                 <YesAndNoBtn />
                 <ComboBlast />
               </div>
@@ -43,8 +45,10 @@ function MarketDetailScreen() {
                 }`}
               >
                 <div className="btn selection_drawer ">
+                  {/* Type: MultiChoice */}
                   <SelectOptions />
-                  {/* <YesAndNoBtn /> */}
+                  {/* Type: Polar */}
+                  <YesAndNoBtn />
                 </div>
               </div>
             </div>
