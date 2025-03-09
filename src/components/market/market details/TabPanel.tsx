@@ -8,7 +8,7 @@ import { EventDetails } from "../../../types/events/details/eventDetail";
 interface TabPanelProps {
   event: EventDetails | null;
 }
-function TabPanel({}: TabPanelProps) {
+function TabPanel({ event }: TabPanelProps) {
   //TOOGLE MODE
   const [activeTypeTab, setActiveTypeTab] = useState("comment");
   // Toggle between "all market" and "comboblast"
@@ -50,7 +50,7 @@ function TabPanel({}: TabPanelProps) {
         <div className="tabs">
           {activeTypeTab === "comment" && (
             <div className="tab_box">
-              <Comment />
+              <Comment event={event} />
             </div>
           )}
           {activeTypeTab === "recent_trades" && (

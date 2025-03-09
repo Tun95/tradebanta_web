@@ -30,7 +30,7 @@ function Market() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [allData, setAllData] = useState<Event[]>([]);
   const [displayedData, setDisplayedData] = useState<Event[]>([]);
-  const itemsPerPage = 9;
+  const itemsPerPage = 10;
 
   //==========================
   // Fetch all events function
